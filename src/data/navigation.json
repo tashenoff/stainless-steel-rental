@@ -1,0 +1,49 @@
+{
+  "navigation": {
+    "menuItems": [
+      {
+        "name": "Главная",
+        "href": "#home"
+      },
+      {
+        "name": "Услуги",
+        "href": "#services"
+      },
+      {
+        "name": "О нас",
+        "href": "#about"
+      },
+      {
+        "name": "Контакты",
+        "href": "#contact"
+      }
+    ],
+    "quickLinks": [
+      {
+        "name": "Главная",
+        "href": "#home"
+      },
+      {
+        "name": "Услуги",
+        "href": "#services"
+      },
+      {
+        "name": "О нас",
+        "href": "#about"
+      },
+      {
+        "name": "Контакты",
+        "href": "#contact"
+      }
+    ],
+    "servicesList": [
+      "Листовая сталь",
+      "Трубы и профили",
+      "Фитинги премиум",
+      "Резка и гибка",
+      "Доставка",
+      "Консультации"
+    ]
+  }
+}
+

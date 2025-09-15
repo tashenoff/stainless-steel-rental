@@ -1,0 +1,35 @@
+{
+  "contacts": {
+    "phone": "+7 (777) 123-45-67",
+    "email": "info@steelrent.kz",
+    "emailOrders": "orders@steelrent.kz",
+    "address": "г. Алматы, ул. Примерная, 123",
+    "workingHours": {
+      "weekdays": "Пн-Пт: 8:00 - 18:00",
+      "weekend": "Сб: 9:00 - 15:00"
+    },
+    "socialLinks": [
+      {
+        "name": "Facebook",
+        "icon": "Facebook",
+        "url": "#"
+      },
+      {
+        "name": "Instagram",
+        "icon": "Instagram",
+        "url": "#"
+      },
+      {
+        "name": "LinkedIn",
+        "icon": "Linkedin",
+        "url": "#"
+      },
+      {
+        "name": "Twitter",
+        "icon": "Twitter",
+        "url": "#"
+      }
+    ]
+  }
+}
+
