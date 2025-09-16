@@ -51,7 +51,7 @@ const Services = () => {
   }
 
   return (
-    <section id="services" className="section-padding bg-black">
+    <section id="services" className="section-padding bg-gray-50">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -60,10 +60,10 @@ const Services = () => {
           transition={{ duration: 1 }}
           className="text-center mb-20"
         >
-          <h2 className="text-5xl md:text-6xl font-extralight text-white mb-6">
+          <h2 className="text-4xl md:text-6xl font-black mb-6 heading-bold heading-dark">
             Наши <span className="gradient-text">услуги</span>
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto font-light leading-relaxed">
+          <p className="text-2xl text-gray-700 max-w-4xl mx-auto font-normal leading-relaxed">
             Полный спектр решений по прокату и обработке нержавеющей стали для ваших проектов.
           </p>
         </motion.div>
@@ -73,47 +73,54 @@ const Services = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-10"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {services.map((service, index) => (
             <motion.div
               key={service.id}
               variants={itemVariants}
-              className="group relative glass-card rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-white/10 hover:border-purple-500/30 custom-shadow"
+              className="group relative glass-card rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-300/30 hover:border-bronze-500/60 custom-shadow h-full flex flex-col overflow-hidden"
             >
+              {/* Background Image */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10 group-hover:opacity-15 transition-opacity duration-500"
+                style={{
+                  backgroundImage: `url('${service.backgroundImage}')`
+                }}
+              ></div>
               {/* Icon */}
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-purple-500/20">
+              <div className="w-16 h-16 bg-gradient-to-br from-bronze-500 to-bronze-600 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-bronze-500/20 relative z-10">
                 <service.icon className="w-8 h-8 text-white" />
               </div>
 
               {/* Content */}
-              <div className="space-y-5">
-                <h3 className="text-2xl font-light text-white group-hover:text-purple-400 transition-colors">
+              <div className="space-y-5 flex-1 flex flex-col relative z-10">
+                <h3 className="text-2xl font-semibold text-white group-hover:text-bronze-200 transition-colors">
                   {service.title}
                 </h3>
                 
-                <p className="text-gray-300 leading-relaxed font-light">
+                <p className="text-gray-100 leading-relaxed font-normal">
                   {service.description}
                 </p>
 
                 {/* Features */}
-                <ul className="space-y-2 pt-2">
+                <ul className="space-y-2 pt-2 flex-1">
                   {service.features.map((feature, idx) => (
-                    <li key={idx} className="text-base text-gray-400 flex items-center font-light">
-                      <div className="w-2 h-2 bg-pink-400 rounded-full mr-3 flex-shrink-0"></div>
+                    <li key={idx} className="text-base text-gray-200 flex items-center font-normal">
+                      <div className="w-2 h-2 bg-bronze-300 rounded-full mr-3 flex-shrink-0"></div>
                       {feature}
                     </li>
                   ))}
                 </ul>
 
                 {/* Price */}
-                <div className="flex items-center justify-between pt-6 border-t border-white/10">
-                  <span className="text-xl font-semibold text-purple-400">
+                <div className="flex items-center justify-between pt-6 border-t border-gray-400/30 mt-auto">
+                  <span className="text-xl font-semibold text-bronze-300">
                     {service.price}
                   </span>
                   <motion.button
                     whileHover={{ x: 5 }}
-                    className="text-gray-400 hover:text-pink-400 transition-colors"
+                    className="text-gray-300 hover:text-bronze-300 transition-colors"
                   >
                     <ArrowUpRight className="w-6 h-6" />
                   </motion.button>
@@ -121,7 +128,7 @@ const Services = () => {
               </div>
 
               {/* Hover effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-bronze-500/5 to-bronze-600/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
             </motion.div>
           ))}
         </motion.div>
@@ -144,16 +151,14 @@ const Services = () => {
             }}
           ></div>
           
-          {/* Dark Overlay */}
+          {/* Dark Overlay for readability */}
           <div 
-            className="absolute inset-0 bg-black"
-            style={{ opacity: cta.backgroundImage.overlay.darkOpacity / 100 }}
+            className="absolute inset-0 bg-black/70"
           ></div>
           
           {/* Gradient Overlay */}
           <div 
-            className="absolute inset-0 bg-gradient-to-br from-purple-900 via-black to-pink-900"
-            style={{ opacity: cta.backgroundImage.overlay.gradientOpacity / 100 }}
+            className="absolute inset-0 bg-gradient-to-br from-gray-900/60 via-gray-800/40 to-gray-900/60"
           ></div>
 
           <div className="container-custom text-center relative z-10">
@@ -164,15 +169,15 @@ const Services = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <h3 className="text-5xl md:text-6xl font-extralight text-white mb-6 leading-tight">
+                <h3 className="text-4xl md:text-6xl font-black text-white mb-6 leading-tight heading-bold">
                   {cta.title}
-                  <span className="block bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  <span className="block bg-gradient-to-r from-bronze-300 to-bronze-200 bg-clip-text text-transparent font-semibold">
                     {cta.subtitle}
                   </span>
                 </h3>
               </motion.div>
               
-              <p className="text-2xl text-gray-300 max-w-3xl mx-auto font-light leading-relaxed">
+              <p className="text-2xl text-gray-100 max-w-4xl mx-auto font-normal leading-relaxed">
                 {cta.description}
               </p>
               
@@ -187,7 +192,7 @@ const Services = () => {
                   whileHover={{ 
                     scale: 1.05, 
                     y: -3,
-                    boxShadow: "0 20px 40px rgba(139, 92, 246, 0.3)"
+                    boxShadow: "0 20px 40px rgba(217, 139, 74, 0.3)"
                   }}
                   whileTap={{ scale: 0.95 }}
                   className="btn-primary text-xl py-6 px-12 min-w-[300px] relative overflow-hidden group inline-flex items-center justify-center"

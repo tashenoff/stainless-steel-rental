@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { 
   MapPin, 
   Phone, 
-  Mail, 
   Clock, 
   Send,
   CheckCircle,
@@ -12,13 +11,11 @@ import {
 import contactsData from '../data/contacts.json'
 
 const Contact = () => {
-  const { phone: contactPhone, email: contactEmail, address, workingHours } = contactsData.contacts
+  const { phone: contactPhone, phoneSecondary, address, workingHours } = contactsData.contacts
   
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    email: '',
-    service: '',
     message: ''
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -32,7 +29,23 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
+    
+    // Формируем сообщение для WhatsApp
+    const message = `Новая заявка с сайта nerja.kz:
+    
+Имя: ${formData.name}
+Телефон: ${formData.phone}
+${formData.message ? `Сообщение: ${formData.message}` : ''}
+
+Дата: ${new Date().toLocaleDateString('ru-RU')} ${new Date().toLocaleTimeString('ru-RU')}`
+    
+    // Номер WhatsApp (используем первый номер из контактов)
+    const whatsappNumber = '77717070011' // +7 (771) 707-00-11 без символов
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+    
+    // Открываем WhatsApp
+    window.open(whatsappUrl, '_blank')
+    
     setIsSubmitted(true)
     
     setTimeout(() => {
@@ -40,8 +53,6 @@ const Contact = () => {
       setFormData({
         name: '',
         phone: '',
-        email: '',
-        service: '',
         message: ''
       })
     }, 3000)
@@ -57,14 +68,8 @@ const Contact = () => {
     {
       icon: Phone,
       title: 'Телефоны',
-      details: [contactPhone],
+      details: [contactPhone, phoneSecondary],
       link: `tel:${contactPhone.replace(/[^+\d]/g, '')}`
-    },
-    {
-      icon: Mail,
-      title: 'Email',
-      details: [contactEmail, contactsData.contacts.emailOrders],
-      link: `mailto:${contactEmail}`
     },
     {
       icon: Clock,
@@ -74,23 +79,14 @@ const Contact = () => {
     }
   ]
 
-  const services = [
-    'Аренда листовой стали',
-    'Аренда труб и профилей',
-    'Аренда фитингов',
-    'Обработка материалов',
-    'Доставка',
-    'Консультация',
-    'Другое'
-  ]
 
   return (
-    <section id="contact" className="section-padding bg-gradient-to-b from-black via-gray-900/10 to-black relative overflow-hidden">
+    <section id="contact" className="section-padding bg-gradient-to-b from-gray-50 via-white/10 to-gray-50 relative overflow-hidden">
       
       {/* Background */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 right-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-pink-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 right-0 w-96 h-96 bg-bronze-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-gray-600/5 rounded-full blur-3xl"></div>
       </div>
 
       <div className="container-custom relative z-10">
@@ -110,24 +106,24 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="inline-flex items-center space-x-2 px-6 py-3 glass-card rounded-full mb-8"
           >
-            <MessageCircle className="w-5 h-5 text-purple-400" />
-            <span className="text-sm font-light text-purple-400">Свяжитесь с нами</span>
+            <MessageCircle className="w-5 h-5 text-bronze-300" />
+            <span className="text-sm font-light text-bronze-300">Свяжитесь с нами</span>
           </motion.div>
           
-          <h2 className="text-5xl md:text-7xl font-extralight text-white mb-6 leading-tight">
+          <h2 className="text-4xl md:text-6xl font-black mb-6 leading-tight heading-bold heading-dark">
             Начнем
-            <span className="block bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-light">
+            <span className="block bg-gradient-to-r from-bronze-400 to-bronze-300 bg-clip-text text-transparent font-semibold">
               сотрудничество
             </span>
           </h2>
           
-          <p className="text-xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Готовы обсудить ваш проект и предложить оптимальные решения. 
+          <p className="text-2xl font-normal text-gray-700 max-w-4xl mx-auto leading-relaxed">
+            Готовы обсудить ваш проект и предложить оптимальные решения.
             Свяжитесь с нами любым удобным способом.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
+        <div className="grid lg:grid-cols-2 gap-8 items-stretch">
           
           {/* Contact Information */}
           <motion.div
@@ -135,13 +131,13 @@ const Contact = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="space-y-12"
+            className="flex flex-col"
           >
-            <div>
-              <h3 className="text-3xl font-light text-white mb-8">
+            <div className="h-full">
+              <h3 className="text-4xl font-black text-gray-900 mb-8 heading-dark">
                 Контактная информация
               </h3>
-              <div className="space-y-8">
+              <div className="space-y-4 flex-1">
                 {contactInfo.map((info, index) => (
                   <motion.div
                     key={info.title}
@@ -149,25 +145,22 @@ const Contact = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="group glass-card p-6 hover:bg-white/5 transition-all duration-500"
+                    className="glass-card p-6 h-full"
                   >
                     <div className="flex items-start space-x-4">
-                      <motion.div
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        className="w-12 h-12 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl flex items-center justify-center group-hover:from-purple-500/30 group-hover:to-pink-500/30 transition-all duration-500"
-                      >
-                        <info.icon className="w-6 h-6 text-purple-300 group-hover:text-white transition-colors duration-300" />
-                      </motion.div>
+                      <div className="w-12 h-12 bg-gradient-to-br from-bronze-500/20 to-bronze-600/20 rounded-xl flex items-center justify-center">
+                        <info.icon className="w-6 h-6 text-bronze-300" />
+                      </div>
                       <div className="flex-1">
-                        <h4 className="font-light text-white mb-3 text-lg group-hover:text-purple-300 transition-colors duration-300">
+                        <h4 className="font-medium text-white mb-3 text-lg">
                           {info.title}
                         </h4>
                         {info.details.map((detail, idx) => (
-                          <p key={idx} className="text-gray-400 mb-1 font-light group-hover:text-gray-300 transition-colors duration-300">
+                          <p key={idx} className="text-gray-200 mb-1 font-light">
                             {info.link && idx === 0 ? (
                               <a 
                                 href={info.link} 
-                                className="hover:text-purple-400 transition-colors"
+                                className="hover:text-bronze-400 transition-colors"
                                 target={info.link.startsWith('http') ? '_blank' : undefined}
                                 rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
                               >
@@ -193,14 +186,14 @@ const Contact = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="glass-card p-8 hover:bg-white/5 transition-all duration-500 relative overflow-hidden"
+            className="glass-card p-8 relative overflow-hidden flex flex-col h-full"
           >
             
             {/* Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-bronze-500/5 to-bronze-600/5"></div>
             
             <div className="relative z-10">
-              <h3 className="text-3xl font-light text-white mb-8">
+              <h3 className="text-4xl font-semibold text-white mb-8">
                 Отправить заявку
               </h3>
 
@@ -210,13 +203,13 @@ const Contact = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   className="text-center py-12"
                 >
-                  <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-r from-bronze-500 to-bronze-600 rounded-full flex items-center justify-center mx-auto mb-6">
                     <CheckCircle className="w-8 h-8 text-white" />
                   </div>
-                  <h4 className="text-2xl font-light text-white mb-4">
+                  <h4 className="text-2xl font-medium text-white mb-4">
                     Спасибо за заявку!
                   </h4>
-                  <p className="text-gray-400 font-light">
+                  <p className="text-gray-200 font-light">
                     Мы свяжемся с вами в ближайшее время
                   </p>
                 </motion.div>
@@ -233,7 +226,7 @@ const Contact = () => {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 text-white placeholder-gray-500 backdrop-blur-sm"
+                        className="w-full px-4 py-3 bg-white/90 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bronze-500 focus:border-transparent transition-all duration-300 text-gray-800 placeholder-gray-500 backdrop-blur-sm"
                         placeholder="Введите ваше имя"
                       />
                     </div>
@@ -247,44 +240,13 @@ const Contact = () => {
                         value={formData.phone}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 text-white placeholder-gray-500 backdrop-blur-sm"
+                        className="w-full px-4 py-3 bg-white/90 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bronze-500 focus:border-transparent transition-all duration-300 text-gray-800 placeholder-gray-500 backdrop-blur-sm"
                         placeholder="+7 (777) 123-45-67"
                       />
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-light text-gray-300 mb-3">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 text-white placeholder-gray-500 backdrop-blur-sm"
-                      placeholder="your@email.com"
-                    />
-                  </div>
 
-                  <div>
-                    <label className="block text-sm font-light text-gray-300 mb-3">
-                      Интересующая услуга
-                    </label>
-                    <select
-                      name="service"
-                      value={formData.service}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 text-white backdrop-blur-sm"
-                    >
-                      <option value="" className="bg-gray-900">Выберите услугу</option>
-                      {services.map((service) => (
-                        <option key={service} value={service} className="bg-gray-900">
-                          {service}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
 
                   <div>
                     <label className="block text-sm font-light text-gray-300 mb-3">
@@ -295,7 +257,7 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleChange}
                       rows={4}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 text-white placeholder-gray-500 resize-none backdrop-blur-sm"
+                      className="w-full px-4 py-3 bg-white/90 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bronze-500 focus:border-transparent transition-all duration-300 text-gray-800 placeholder-gray-500 resize-none backdrop-blur-sm"
                       placeholder="Расскажите о вашем проекте..."
                     />
                   </div>
@@ -304,7 +266,7 @@ const Contact = () => {
                     type="submit"
                     whileHover={{ scale: 1.02, y: -2 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full btn-primary group"
+                    className="w-full btn-primary group inline-flex items-center justify-center"
                   >
                     Отправить заявку
                     <Send className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
@@ -327,23 +289,23 @@ const Contact = () => {
           transition={{ duration: 1, delay: 0.4 }}
           className="text-center mt-20"
         >
-          <div className="glass-card p-12 max-w-4xl mx-auto relative overflow-hidden">
+          <div className="w-full py-20 px-6 relative overflow-hidden bg-gray-800/95">
             
             {/* Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-transparent to-pink-500/10"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-bronze-500/20 via-transparent to-bronze-600/20"></div>
             
-            <div className="relative z-10 space-y-8">
-              <h3 className="text-4xl font-light text-white mb-4">
+            <div className="container-custom relative z-10 space-y-8 text-center">
+              <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-6 heading-bold">
                 Нужна срочная консультация?
               </h3>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">
+              <p className="text-lg md:text-xl lg:text-2xl text-gray-100 max-w-4xl mx-auto font-normal leading-relaxed">
                 Позвоните нам прямо сейчас или напишите в WhatsApp — 
                 мы ответим на все вопросы и поможем с выбором
               </p>
               
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <motion.a
-                  href="tel:+77271234567"
+                     href={`tel:${contactPhone.replace(/[^+\d]/g, '')}`}
                   whileHover={{ scale: 1.05, y: -2 }}
                   className="btn-primary inline-flex items-center justify-center"
                 >
@@ -351,7 +313,7 @@ const Contact = () => {
                   Позвонить сейчас
                 </motion.a>
                 <motion.a
-                  href="https://wa.me/77771234567"
+                     href={`https://wa.me/${phoneSecondary.replace(/[^+\d]/g, '')}`}
                   whileHover={{ scale: 1.05, y: -2 }}
                   className="btn-secondary inline-flex items-center justify-center"
                 >

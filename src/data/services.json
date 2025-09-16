@@ -5,6 +5,7 @@
       "icon": "Square",
       "title": "Листовая сталь",
       "description": "Высококачественные листы из нержавеющей стали различных марок и толщин.",
+      "backgroundImage": "/images/services/sheets.jpg",
       "features": [
         "AISI 304, 316, 430",
         "Толщина от 0.5 до 50 мм",
@@ -17,6 +18,7 @@
       "icon": "Circle",
       "title": "Трубы и профили",
       "description": "Широкий выбор труб и профилей для любых конструкций и систем.",
+      "backgroundImage": "/images/services/pipes.jpg",
       "features": [
         "Круглые, квадратные, прямоугольные",
         "Различные диаметры",
@@ -29,6 +31,7 @@
       "icon": "Wrench",
       "title": "Обработка металла",
       "description": "Профессиональные услуги по резке, гибке и сварке нержавеющей стали.",
+      "backgroundImage": "/images/services/processing.jpg",
       "features": [
         "Лазерная резка",
         "Гибка на станках ЧПУ",
@@ -41,6 +44,7 @@
       "icon": "Truck",
       "title": "Доставка",
       "description": "Быстрая и надежная доставка по Алматы и всему Казахстану.",
+      "backgroundImage": "/images/services/delivery.jpg",
       "features": [
         "Собственный автопарк",
         "Срочная доставка",
@@ -53,6 +57,7 @@
       "icon": "Calculator",
       "title": "Расчет проекта",
       "description": "Помощь в расчете необходимого количества материала и стоимости.",
+      "backgroundImage": "/images/services/calculation.jpg",
       "features": [
         "Бесплатная консультация",
         "Оптимизация затрат",
@@ -65,6 +70,7 @@
       "icon": "Zap",
       "title": "Специальные заказы",
       "description": "Изготовление нестандартных изделий по вашим чертежам.",
+      "backgroundImage": "/images/services/custom.jpg",
       "features": [
         "Индивидуальный подход",
         "Высокая точность",

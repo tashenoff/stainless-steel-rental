@@ -103,12 +103,12 @@ const Gallery = () => {
     : galleryItems.filter(item => item.category === activeCategory)
 
   return (
-    <section id="gallery" className="section-padding bg-gradient-to-b from-black via-gray-900/10 to-black relative overflow-hidden">
+    <section id="gallery" className="section-padding bg-gradient-to-b from-gray-50 via-white/10 to-gray-50 relative overflow-hidden">
       
       {/* Background */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/3 left-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/3 right-0 w-96 h-96 bg-pink-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/3 left-0 w-96 h-96 bg-bronze-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/3 right-0 w-96 h-96 bg-gray-600/5 rounded-full blur-3xl"></div>
       </div>
 
       <div className="container-custom relative z-10">
@@ -128,18 +128,18 @@ const Gallery = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="inline-flex items-center space-x-2 px-6 py-3 glass-card rounded-full mb-8"
           >
-            <Eye className="w-5 h-5 text-purple-400" />
-            <span className="text-sm font-light text-purple-400">Наши работы</span>
+            <Eye className="w-5 h-5 text-bronze-300" />
+            <span className="text-sm font-light text-bronze-300">Наши работы</span>
           </motion.div>
           
-          <h2 className="text-5xl md:text-7xl font-extralight text-white mb-6 leading-tight">
+          <h2 className="text-5xl md:text-7xl font-extralight text-gray-800 mb-6 leading-tight">
             Галерея
-            <span className="block bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-light">
+            <span className="block bg-gradient-to-r from-bronze-400 to-bronze-300 bg-clip-text text-transparent font-light">
               проектов
             </span>
           </h2>
           
-          <p className="text-xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl font-light text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Коллекция наших лучших работ и реализованных проектов с использованием 
             премиальной нержавеющей стали
           </p>
@@ -161,7 +161,7 @@ const Gallery = () => {
               whileTap={{ scale: 0.95 }}
               className={`px-6 py-3 font-light transition-all duration-500 ${
                 activeCategory === category.id
-                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-2xl shadow-purple-500/25'
+                  ? 'bg-gradient-to-r from-bronze-500 to-bronze-600 text-white shadow-2xl shadow-bronze-500/25'
                   : 'glass-card text-gray-400 hover:text-white hover:bg-white/10'
               } rounded-full`}
             >
@@ -201,7 +201,7 @@ const Gallery = () => {
                 />
                 
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   
                   {/* Content */}
                   <div className="absolute bottom-0 left-0 right-0 p-6">
@@ -228,7 +228,7 @@ const Gallery = () => {
                       transition={{ delay: 0.2 }}
                       className="flex items-center space-x-4"
                     >
-                      <div className="flex items-center space-x-1 text-pink-400">
+                      <div className="flex items-center space-x-1 text-bronze-400">
                         <Heart className="w-4 h-4" />
                         <span className="text-sm">{item.likes}</span>
                       </div>
@@ -252,7 +252,7 @@ const Gallery = () => {
                 {/* Featured Badge */}
                 {item.featured && (
                   <div className="absolute top-4 left-4">
-                    <div className="px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-medium rounded-full">
+                    <div className="px-3 py-1 bg-gradient-to-r from-bronze-500 to-bronze-600 text-white text-xs font-medium rounded-full">
                       Рекомендуем
                     </div>
                   </div>
@@ -268,7 +268,7 @@ const Gallery = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-gray-900/90 backdrop-blur-sm z-50 flex items-center justify-center p-4"
             onClick={() => setSelectedImage(null)}
           >
             <motion.div
@@ -306,7 +306,7 @@ const Gallery = () => {
                   </div>
                   
                   <div className="flex items-center space-x-4">
-                    <div className="flex items-center space-x-1 text-pink-400">
+                    <div className="flex items-center space-x-1 text-bronze-400">
                       <Heart className="w-5 h-5" />
                       <span>{selectedImage.likes}</span>
                     </div>
@@ -331,7 +331,7 @@ const Gallery = () => {
           <div className="glass-card p-12 max-w-4xl mx-auto relative overflow-hidden">
             
             {/* Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-transparent to-pink-500/10"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-bronze-500/10 via-transparent to-bronze-600/10"></div>
             
             <div className="relative z-10 space-y-6">
               <h3 className="text-4xl font-light text-white mb-4">

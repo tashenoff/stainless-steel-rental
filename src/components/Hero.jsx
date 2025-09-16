@@ -2,9 +2,11 @@ import { motion } from 'framer-motion'
 import { ArrowRight, Star, Sparkles, ChevronDown } from 'lucide-react'
 import companyData from '../data/company.json'
 import { useState, useEffect } from 'react'
+import Modal from './Modal'
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const { hero } = companyData.company
 
   useEffect(() => {
@@ -26,7 +28,7 @@ const Hero = () => {
   ]
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center bg-gray-200 overflow-hidden">
       
       {/* Background */}
       <div className="absolute inset-0">
@@ -38,16 +40,14 @@ const Hero = () => {
           }}
         ></div>
         
-        {/* Dark Overlay */}
+        {/* Dark Overlay for readability */}
         <div 
-          className="absolute inset-0 bg-black"
-          style={{ opacity: hero.backgroundImage.overlay.darkOpacity / 100 }}
+          className="absolute inset-0 bg-black/70"
         ></div>
         
         {/* Gradient Overlay */}
         <div 
-          className="absolute inset-0 bg-gradient-to-br from-black via-black/40 to-black"
-          style={{ opacity: hero.backgroundImage.overlay.gradientOpacity / 100 }}
+          className="absolute inset-0 bg-gradient-to-br from-gray-900/60 via-gray-800/40 to-gray-900/60"
         ></div>
         
         {/* Animated Particles */}
@@ -55,7 +55,7 @@ const Hero = () => {
           {[...Array(50)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-1 h-1 bg-white rounded-full opacity-20"
+              className="absolute w-1 h-1 bg-bronze-400 rounded-full opacity-40"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -75,12 +75,12 @@ const Hero = () => {
 
         {/* Geometric Shapes */}
         <motion.div
-          className="absolute top-1/4 left-1/4 w-64 h-64 border border-white/10 rounded-full"
+          className="absolute top-1/4 left-1/4 w-64 h-64 border border-gray-400/30 rounded-full"
           animate={{ rotate: 360 }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
-          className="absolute bottom-1/4 right-1/4 w-48 h-48 border border-white/5 rounded-full"
+          className="absolute bottom-1/4 right-1/4 w-48 h-48 border border-bronze-400/30 rounded-full"
           animate={{ rotate: -360 }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
         />
@@ -89,7 +89,7 @@ const Hero = () => {
         <motion.div
           className="absolute inset-0 opacity-30"
           style={{
-            background: `radial-gradient(600px circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(147, 51, 234, 0.1), transparent 40%)`
+            background: `radial-gradient(600px circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(217, 139, 74, 0.1), transparent 40%)`
           }}
         />
       </div>
@@ -112,14 +112,14 @@ const Hero = () => {
             transition={{ duration: 1, delay: 0.4 }}
             className="space-y-6"
           >
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-extralight text-white leading-none tracking-tight">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-none tracking-tight">
               {hero.title}
-              <span className="block font-light bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="block font-medium bg-gradient-to-r from-bronze-300 via-bronze-200 to-bronze-400 bg-clip-text text-transparent">
                 {hero.subtitle}
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl font-extralight text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-2xl md:text-3xl font-light text-gray-100 max-w-4xl mx-auto leading-relaxed">
               {hero.description}
             </p>
           </motion.div>
@@ -133,6 +133,7 @@ const Hero = () => {
             className="flex justify-center pt-8"
           >
             <motion.button
+              onClick={() => setIsModalOpen(true)}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               className="btn-primary group min-w-[250px] inline-flex items-center justify-center"
@@ -152,14 +153,16 @@ const Hero = () => {
         transition={{ delay: 2 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
       >
-        <motion.div
+        <motion.a
+          href="#services"
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="flex flex-col items-center space-y-2 text-gray-400"
+          whileHover={{ scale: 1.1 }}
+          className="flex flex-col items-center space-y-2 text-gray-300 hover:text-bronze-300 transition-colors cursor-pointer"
         >
           <span className="text-xs font-light uppercase tracking-widest">Прокрутите вниз</span>
           <ChevronDown className="w-5 h-5" />
-        </motion.div>
+        </motion.a>
       </motion.div>
 
       {/* Floating Elements */}
@@ -173,7 +176,7 @@ const Hero = () => {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute top-1/4 right-1/4 w-2 h-2 bg-purple-400 rounded-full opacity-60"
+        className="absolute top-1/4 right-1/4 w-2 h-2 bg-bronze-400 rounded-full opacity-60"
       />
       
       <motion.div
@@ -187,8 +190,11 @@ const Hero = () => {
           ease: "easeInOut",
           delay: 1
         }}
-        className="absolute bottom-1/3 left-1/4 w-1 h-1 bg-pink-400 rounded-full opacity-40"
+        className="absolute bottom-1/3 left-1/4 w-1 h-1 bg-bronze-400 rounded-full opacity-40"
       />
+
+      {/* Modal */}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   )
 }

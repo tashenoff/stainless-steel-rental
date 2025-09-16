@@ -1,9 +1,10 @@
 {
   "contacts": {
-    "phone": "+7 (777) 123-45-67",
-    "email": "info@steelrent.kz",
-    "emailOrders": "orders@steelrent.kz",
-    "address": "г. Алматы, ул. Примерная, 123",
+    "phone": "+7 (771) 707-00-11",
+    "phoneSecondary": "+7 (700) 331-77-45",
+    "email": "info@nerja.kz",
+    "emailOrders": "orders@nerja.kz",
+    "address": "г. Алматы, пр-т Рыскулова 73А, металлобаза \"Окжетпес\"",
     "workingHours": {
       "weekdays": "Пн-Пт: 8:00 - 18:00",
       "weekend": "Сб: 9:00 - 15:00"

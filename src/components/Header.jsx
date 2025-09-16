@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Menu, X, Phone, Mail } from 'lucide-react'
+import { Menu, X, Phone } from 'lucide-react'
 import navigationData from '../data/navigation.json'
 import contactsData from '../data/contacts.json'
 import companyData from '../data/company.json'
@@ -18,7 +18,7 @@ const Header = () => {
   }, [])
 
   const { menuItems } = navigationData.navigation
-  const { phone, email } = contactsData.contacts
+  const { phone, phoneSecondary } = contactsData.contacts
   const { name, tagline } = companyData.company
 
   return (
@@ -28,8 +28,8 @@ const Header = () => {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className={`fixed w-full z-50 transition-all duration-700 ${
         isScrolled 
-          ? 'bg-black/80 backdrop-blur-2xl border-b border-white/10' 
-          : 'bg-transparent'
+          ? 'bg-white/90 backdrop-blur-2xl border-b border-gray-300/30' 
+          : 'bg-black/20 backdrop-blur-sm'
       }`}
     >
       <div className="container-custom">
@@ -43,14 +43,16 @@ const Header = () => {
             className="flex items-center space-x-4"
           >
             <div className="relative">
-              <div className="w-12 h-12 bg-gradient-to-br from-white to-gray-300 rounded-full flex items-center justify-center shadow-2xl shadow-white/20">
-                <span className="text-black font-bold text-xl">S</span>
+              <div className="w-12 h-12 bg-gradient-to-br from-bronze-400 to-bronze-600 rounded-full flex items-center justify-center shadow-2xl shadow-bronze-500/20">
+                <span className="text-white font-bold text-xl">S</span>
               </div>
-              <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-pulse"></div>
+              <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-bronze-500 to-bronze-300 rounded-full animate-pulse"></div>
             </div>
             
             <div>
-              <h1 className="text-2xl font-light text-white tracking-wide">{name}</h1>
+              <h1 className={`text-2xl font-semibold tracking-wide ${ 
+                isScrolled ? 'text-gray-800' : 'text-white'
+              }`}>{name}</h1>
               <p className="text-xs text-gray-400 font-light">{tagline}</p>
             </div>
           </motion.div>
@@ -64,10 +66,14 @@ const Header = () => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                className="text-white hover:text-gray-300 font-light text-sm transition-all duration-300 relative group"
+                className={`font-light text-sm transition-all duration-300 relative group ${
+                  isScrolled 
+                    ? 'text-gray-700 hover:text-bronze-600' 
+                    : 'text-white hover:text-bronze-300'
+                }`}
               >
                 {item.name}
-                <span className="absolute -bottom-2 left-0 w-0 h-px bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-2 left-0 w-0 h-px bg-gradient-to-r from-bronze-500 to-bronze-300 transition-all duration-300 group-hover:w-full"></span>
               </motion.a>
             ))}
           </nav>
@@ -79,14 +85,18 @@ const Header = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="hidden xl:flex items-center space-x-6 text-sm"
           >
-            <div className="flex items-center space-x-2 text-gray-300">
-              <Phone className="w-4 h-4" />
-              <span>{phone}</span>
-            </div>
-            <div className="flex items-center space-x-2 text-gray-300">
-              <Mail className="w-4 h-4" />
-              <span>{email}</span>
-            </div>
+               <div className={`flex items-center space-x-4 ${
+                 isScrolled ? 'text-gray-600' : 'text-gray-200'
+               }`}>
+                 <div className="flex items-center space-x-2">
+                   <Phone className="w-4 h-4" />
+                   <span>{phone}</span>
+                 </div>
+                 <div className="flex items-center space-x-2">
+                   <Phone className="w-4 h-4" />
+                   <span>{phoneSecondary}</span>
+                 </div>
+               </div>
           </motion.div>
 
           {/* Mobile Menu Button */}
@@ -95,7 +105,11 @@ const Header = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 text-white hover:text-gray-300 transition-colors relative z-10"
+            className={`lg:hidden p-2 transition-colors relative z-10 ${
+              isScrolled 
+                ? 'text-gray-700 hover:text-bronze-600' 
+                : 'text-white hover:text-bronze-300'
+            }`}
           >
             <div className="w-6 h-6 relative">
               <motion.span
@@ -122,7 +136,7 @@ const Header = () => {
             height: isOpen ? 'auto' : 0
           }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="lg:hidden overflow-hidden bg-black/95 backdrop-blur-2xl border-t border-white/10"
+          className="lg:hidden overflow-hidden bg-white/95 backdrop-blur-2xl border-t border-gray-300/30"
         >
           <div className="py-8 space-y-6">
             {menuItems.map((item, index) => (
@@ -136,20 +150,22 @@ const Header = () => {
                 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
                 onClick={() => setIsOpen(false)}
-                className="block px-6 py-2 text-white hover:text-gray-300 transition-colors duration-300 text-lg font-light"
+                className="block px-6 py-2 text-gray-700 hover:text-bronze-600 transition-colors duration-300 text-lg font-light"
               >
                 {item.name}
               </motion.a>
             ))}
             
-            <div className="px-6 pt-6 border-t border-white/10 space-y-4">
-              <div className="flex items-center space-x-2 text-gray-300">
-                <Phone className="w-4 h-4" />
-                <span>+7 (777) 123-45-67</span>
-              </div>
-              <div className="flex items-center space-x-2 text-gray-300">
-                <Mail className="w-4 h-4" />
-                <span>info@steelrent.kz</span>
+            <div className="px-6 pt-6 border-t border-gray-300/30 space-y-4">
+              <div className="space-y-2">
+                <div className="flex items-center space-x-2 text-gray-700">
+                  <Phone className="w-4 h-4" />
+                  <span>{phone}</span>
+                </div>
+                <div className="flex items-center space-x-2 text-gray-700">
+                  <Phone className="w-4 h-4" />
+                  <span>{phoneSecondary}</span>
+                </div>
               </div>
             </div>
           </div>

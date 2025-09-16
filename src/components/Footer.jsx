@@ -2,7 +2,6 @@ import { motion } from 'framer-motion'
 import { 
   MapPin, 
   Phone, 
-  Mail, 
   Clock,
   ArrowUp,
   Heart,
@@ -22,7 +21,7 @@ const Footer = () => {
   }
 
   const { quickLinks: navLinks, servicesList } = navigationData.navigation
-  const { phone, email, address, socialLinks } = contactsData.contacts
+  const { phone, phoneSecondary, address, socialLinks } = contactsData.contacts
   const { name, description } = companyData.company
 
   // Маппинг иконок для социальных сетей
@@ -37,12 +36,12 @@ const Footer = () => {
 
 
   return (
-    <footer className="relative bg-gradient-to-b from-black to-gray-900 overflow-hidden">
+    <footer className="relative bg-gradient-to-b from-gray-200 to-gray-300 overflow-hidden">
       
       {/* Background */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-bronze-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gray-600/5 rounded-full blur-3xl"></div>
       </div>
 
       <div className="relative z-10">
@@ -59,17 +58,17 @@ const Footer = () => {
               className="space-y-6"
             >
               <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-white to-gray-300 rounded-full flex items-center justify-center shadow-2xl shadow-white/20">
-                  <span className="text-black font-bold text-xl">S</span>
+                <div className="w-12 h-12 bg-gradient-to-br from-bronze-400 to-bronze-600 rounded-full flex items-center justify-center shadow-2xl shadow-bronze-500/20">
+                  <span className="text-white font-bold text-xl">S</span>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-light text-white">SteelRent</h3>
-                  <p className="text-gray-400 text-sm font-light">Premium Steel Solutions</p>
+                  <h3 className="text-3xl font-black text-gray-900 heading-bold">nerja.kz</h3>
+                  <p className="text-gray-700 text-base font-normal">Premium Steel Solutions</p>
                 </div>
               </div>
               
-              <p className="text-gray-400 leading-relaxed font-light">
-                Качественные решения в области проката нержавеющей стали. 
+              <p className="text-gray-700 leading-relaxed font-normal">
+                Качественные решения в области проката нержавеющей стали.
                 Создаем долгосрочные партнерские отношения, основанные на качестве и доверии.
               </p>
 
@@ -81,7 +80,7 @@ const Footer = () => {
                       key={social.name}
                       href={social.url}
                       whileHover={{ scale: 1.1, y: -2 }}
-                      className="w-12 h-12 glass-card rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-all duration-300 hover:bg-white/10"
+                      className="w-12 h-12 glass-card rounded-full flex items-center justify-center text-gray-200 hover:text-bronze-300 transition-all duration-300 hover:bg-bronze-500/20"
                       target={social.url.startsWith('http') ? '_blank' : undefined}
                       rel={social.url.startsWith('http') ? 'noopener noreferrer' : undefined}
                     >
@@ -99,15 +98,15 @@ const Footer = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.1 }}
             >
-              <h4 className="text-xl font-light text-white mb-8">Навигация</h4>
+              <h4 className="text-2xl font-black text-gray-900 mb-8 heading-bold">Навигация</h4>
               <ul className="space-y-4">
                 {navLinks.map((link) => (
                   <li key={link.name}>
                     <a
                       href={link.href}
-                      className="text-gray-400 hover:text-white transition-colors duration-300 font-light flex items-center group"
+                      className="text-gray-600 hover:text-bronze-600 transition-colors duration-300 font-light flex items-center group"
                     >
-                      <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                      <span className="w-2 h-2 bg-bronze-500 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                       {link.name}
                     </a>
                   </li>
@@ -122,12 +121,12 @@ const Footer = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <h4 className="text-xl font-light text-white mb-8">Наши услуги</h4>
+              <h4 className="text-2xl font-black text-gray-900 mb-8 heading-bold">Наши услуги</h4>
               <ul className="space-y-4">
                 {servicesList.map((service) => (
                   <li key={service}>
-                    <span className="text-gray-400 hover:text-white transition-colors duration-300 font-light cursor-pointer flex items-center group">
-                      <span className="w-2 h-2 bg-pink-500 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                    <span className="text-gray-600 hover:text-bronze-600 transition-colors duration-300 font-light cursor-pointer flex items-center group">
+                      <span className="w-2 h-2 bg-bronze-500 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                       {service}
                     </span>
                   </li>
@@ -142,44 +141,32 @@ const Footer = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              <h4 className="text-xl font-light text-white mb-8">Контакты</h4>
+              <h4 className="text-2xl font-black text-gray-900 mb-8 heading-bold">Контакты</h4>
               <div className="space-y-6">
                 
                 <div className="flex items-start space-x-3">
-                  <MapPin className="w-5 h-5 text-purple-400 mt-1 flex-shrink-0" />
-                  <div className="text-gray-400 font-light">
-                    <p>ул. Промышленная, 45</p>
-                    <p>г. Алматы, 050000</p>
+                  <MapPin className="w-5 h-5 text-bronze-400 mt-1 flex-shrink-0" />
+                  <div className="text-gray-600 font-light">
+                    <p>{address}</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-3">
-                  <Phone className="w-5 h-5 text-purple-400 mt-1 flex-shrink-0" />
-                  <div className="text-gray-400 font-light">
-                    <a href="tel:+77271234567" className="hover:text-white transition-colors block">
-                      +7 (727) 123-45-67
+                  <Phone className="w-5 h-5 text-bronze-400 mt-1 flex-shrink-0" />
+                  <div className="text-gray-600 font-light">
+                    <a href={`tel:${phone.replace(/[^+\d]/g, '')}`} className="hover:text-bronze-600 transition-colors block">
+                      {phone}
                     </a>
-                    <a href="tel:+77771234567" className="hover:text-white transition-colors block">
-                      +7 (777) 123-45-67
-                    </a>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-3">
-                  <Mail className="w-5 h-5 text-purple-400 mt-1 flex-shrink-0" />
-                  <div className="text-gray-400 font-light">
-                    <a href={`mailto:${email}`} className="hover:text-white transition-colors block">
-                      {email}
-                    </a>
-                    <a href={`mailto:${contactsData.contacts.emailOrders}`} className="hover:text-white transition-colors block">
-                      {contactsData.contacts.emailOrders}
+                    <a href={`tel:${phoneSecondary.replace(/[^+\d]/g, '')}`} className="hover:text-bronze-600 transition-colors block">
+                      {phoneSecondary}
                     </a>
                   </div>
                 </div>
                 
+                
                 <div className="flex items-start space-x-3">
-                  <Clock className="w-5 h-5 text-purple-400 mt-1 flex-shrink-0" />
-                  <div className="text-gray-400 font-light">
+                  <Clock className="w-5 h-5 text-bronze-400 mt-1 flex-shrink-0" />
+                  <div className="text-gray-600 font-light">
                     <p>Пн-Пт: 8:00 - 18:00</p>
                     <p>Сб: 9:00 - 15:00</p>
                   </div>
@@ -197,7 +184,7 @@ const Footer = () => {
               
               <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-8">
                 <p className="text-gray-500 text-sm font-light">
-                  © 2024 SteelRent. Все права защищены.
+                  © 2024 nerja.kz. Все права защищены.
                 </p>
                 <div className="flex space-x-6 text-sm">
                   <a href="#" className="text-gray-500 hover:text-white transition-colors font-light">
