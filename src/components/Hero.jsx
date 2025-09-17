@@ -40,14 +40,34 @@ const Hero = () => {
           }}
         ></div>
         
-        {/* Dark Overlay for readability */}
+        {/* Silver Diagonal Mask for readability */}
         <div 
-          className="absolute inset-0 bg-black/70"
+          className="absolute inset-0 bg-gradient-to-tl from-gray-800/80 via-gray-600/50 to-transparent"
         ></div>
         
-        {/* Gradient Overlay */}
+        {/* Additional Silver Diagonal Overlay */}
         <div 
-          className="absolute inset-0 bg-gradient-to-br from-gray-900/60 via-gray-800/40 to-gray-900/60"
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(315deg, 
+              rgba(156, 163, 175, 0.9) 0%, 
+              rgba(107, 114, 128, 0.7) 30%, 
+              rgba(75, 85, 99, 0.5) 50%, 
+              rgba(55, 65, 81, 0.3) 70%, 
+              transparent 100%)`
+          }}
+        ></div>
+        
+        {/* Top Left Silver Accent */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: `radial-gradient(ellipse 500px 400px at 0% 0%, 
+              rgba(156, 163, 175, 0.7) 0%, 
+              rgba(107, 114, 128, 0.5) 30%, 
+              rgba(75, 85, 99, 0.3) 50%, 
+              transparent 70%)`
+          }}
         ></div>
         
         {/* Animated Particles */}
@@ -55,14 +75,15 @@ const Hero = () => {
           {[...Array(50)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-1 h-1 bg-bronze-400 rounded-full opacity-40"
+              className="absolute w-1 h-1 bg-gray-300 rounded-full opacity-60"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
               }}
               animate={{
                 y: [0, -30, 0],
-                opacity: [0.2, 0.8, 0.2],
+                opacity: [0.3, 0.9, 0.3],
+                scale: [1, 1.2, 1],
               }}
               transition={{
                 duration: 3 + Math.random() * 2,
@@ -75,21 +96,21 @@ const Hero = () => {
 
         {/* Geometric Shapes */}
         <motion.div
-          className="absolute top-1/4 left-1/4 w-64 h-64 border border-gray-400/30 rounded-full"
+          className="absolute top-1/4 left-1/4 w-64 h-64 border border-gray-300/40 rounded-full"
           animate={{ rotate: 360 }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
-          className="absolute bottom-1/4 right-1/4 w-48 h-48 border border-bronze-400/30 rounded-full"
+          className="absolute bottom-1/4 right-1/4 w-48 h-48 border border-gray-400/50 rounded-full"
           animate={{ rotate: -360 }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
         />
         
         {/* Mouse-following gradient */}
         <motion.div
-          className="absolute inset-0 opacity-30"
+          className="absolute inset-0 opacity-20"
           style={{
-            background: `radial-gradient(600px circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(217, 139, 74, 0.1), transparent 40%)`
+            background: `radial-gradient(600px circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(156, 163, 175, 0.15), transparent 40%)`
           }}
         />
       </div>

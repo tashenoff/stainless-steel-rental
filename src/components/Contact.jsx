@@ -69,7 +69,7 @@ ${formData.message ? `Сообщение: ${formData.message}` : ''}
       icon: Phone,
       title: 'Телефоны',
       details: [contactPhone, phoneSecondary],
-      link: `tel:${contactPhone.replace(/[^+\d]/g, '')}`
+      links: [`tel:${contactPhone.replace(/[^+\d]/g, '')}`, `tel:${phoneSecondary.replace(/[^+\d]/g, '')}`]
     },
     {
       icon: Clock,
@@ -157,7 +157,16 @@ ${formData.message ? `Сообщение: ${formData.message}` : ''}
                         </h4>
                         {info.details.map((detail, idx) => (
                           <p key={idx} className="text-gray-200 mb-1 font-light">
-                            {info.link && idx === 0 ? (
+                            {info.links && info.links[idx] ? (
+                              <a 
+                                href={info.links[idx]} 
+                                className="hover:text-bronze-400 transition-colors"
+                                target={info.links[idx].startsWith('http') ? '_blank' : undefined}
+                                rel={info.links[idx].startsWith('http') ? 'noopener noreferrer' : undefined}
+                              >
+                                {detail}
+                              </a>
+                            ) : info.link && idx === 0 ? (
                               <a 
                                 href={info.link} 
                                 className="hover:text-bronze-400 transition-colors"

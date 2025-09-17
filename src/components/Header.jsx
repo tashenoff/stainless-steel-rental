@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Menu, X, Phone } from 'lucide-react'
+import { Menu, X, Phone, MessageCircle } from 'lucide-react'
 import navigationData from '../data/navigation.json'
 import contactsData from '../data/contacts.json'
 import companyData from '../data/company.json'
@@ -88,29 +88,59 @@ const Header = () => {
                <div className={`flex items-center space-x-4 ${
                  isScrolled ? 'text-gray-600' : 'text-gray-200'
                }`}>
-                 <div className="flex items-center space-x-2">
+                 <a 
+                   href={`tel:${phone}`}
+                   className="flex items-center space-x-2 hover:text-bronze-400 transition-colors"
+                 >
                    <Phone className="w-4 h-4" />
                    <span>{phone}</span>
-                 </div>
-                 <div className="flex items-center space-x-2">
+                 </a>
+                 <a 
+                   href={`tel:${phoneSecondary}`}
+                   className="flex items-center space-x-2 hover:text-bronze-400 transition-colors"
+                 >
                    <Phone className="w-4 h-4" />
                    <span>{phoneSecondary}</span>
-                 </div>
+                 </a>
+                 <a
+                   href={`https://wa.me/77717070011`}
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   className="flex items-center space-x-2 hover:text-bronze-400 transition-colors bg-green-600 hover:bg-green-700 px-3 py-2 rounded-lg text-white"
+                 >
+                   <MessageCircle className="w-4 h-4" />
+                   <span>WhatsApp</span>
+                 </a>
                </div>
           </motion.div>
 
-          {/* Mobile Menu Button */}
-          <motion.button
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            onClick={() => setIsOpen(!isOpen)}
-            className={`lg:hidden p-2 transition-colors relative z-10 ${
-              isScrolled 
-                ? 'text-gray-700 hover:text-bronze-600' 
-                : 'text-white hover:text-bronze-300'
-            }`}
-          >
+          {/* Mobile WhatsApp & Menu Buttons */}
+          <div className="lg:hidden flex items-center space-x-2">
+            {/* Mobile WhatsApp Button */}
+            <motion.a
+              href={`https://wa.me/77717070011`}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="p-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors relative z-10"
+            >
+              <MessageCircle className="w-5 h-5" />
+            </motion.a>
+
+            {/* Mobile Menu Button */}
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              onClick={() => setIsOpen(!isOpen)}
+              className={`p-2 transition-colors relative z-10 ${
+                isScrolled 
+                  ? 'text-gray-700 hover:text-bronze-600' 
+                  : 'text-white hover:text-bronze-300'
+              }`}
+            >
             <div className="w-6 h-6 relative">
               <motion.span
                 animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
@@ -125,7 +155,8 @@ const Header = () => {
                 className="absolute w-6 h-0.5 bg-current transform transition-all duration-300 origin-center top-5"
               />
             </div>
-          </motion.button>
+            </motion.button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -157,15 +188,30 @@ const Header = () => {
             ))}
             
             <div className="px-6 pt-6 border-t border-gray-300/30 space-y-4">
-              <div className="space-y-2">
-                <div className="flex items-center space-x-2 text-gray-700">
+              <div className="space-y-3">
+                <a 
+                  href={`tel:${phone}`}
+                  className="flex items-center space-x-2 text-gray-700 hover:text-bronze-600 transition-colors"
+                >
                   <Phone className="w-4 h-4" />
                   <span>{phone}</span>
-                </div>
-                <div className="flex items-center space-x-2 text-gray-700">
+                </a>
+                <a 
+                  href={`tel:${phoneSecondary}`}
+                  className="flex items-center space-x-2 text-gray-700 hover:text-bronze-600 transition-colors"
+                >
                   <Phone className="w-4 h-4" />
                   <span>{phoneSecondary}</span>
-                </div>
+                </a>
+                <a
+                  href={`https://wa.me/77717070011`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg transition-colors w-full justify-center"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>WhatsApp</span>
+                </a>
               </div>
             </div>
           </div>
