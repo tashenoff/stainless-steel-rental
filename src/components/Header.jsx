@@ -103,7 +103,7 @@ const Header = () => {
                    <span>{phoneSecondary}</span>
                  </a>
                  <a
-                   href={`https://wa.me/77717070011`}
+                  href={`https://wa.me/77003317744`}
                    target="_blank"
                    rel="noopener noreferrer"
                    className="flex items-center space-x-2 hover:text-bronze-400 transition-colors bg-green-600 hover:bg-green-700 px-3 py-2 rounded-lg text-white"
@@ -118,7 +118,7 @@ const Header = () => {
           <div className="lg:hidden flex items-center space-x-2">
             {/* Mobile WhatsApp Button */}
             <motion.a
-              href={`https://wa.me/77717070011`}
+              href={`https://wa.me/77003317744`}
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, scale: 0.8 }}
@@ -204,7 +204,7 @@ const Header = () => {
                   <span>{phoneSecondary}</span>
                 </a>
                 <a
-                  href={`https://wa.me/77717070011`}
+                  href={`https://wa.me/77003317744`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg transition-colors w-full justify-center"

@@ -40,7 +40,7 @@ ${formData.message ? `Сообщение: ${formData.message}` : ''}
 Дата: ${new Date().toLocaleDateString('ru-RU')} ${new Date().toLocaleTimeString('ru-RU')}`
     
     // Номер WhatsApp (используем первый номер из контактов)
-    const whatsappNumber = '77717070011' // +7 (771) 707-00-11 без символов
+    const whatsappNumber = '77003317744' // +7 (700) 331-77-44 без символов
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
     
     // Открываем WhatsApp
