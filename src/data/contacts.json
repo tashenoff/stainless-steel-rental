@@ -1,7 +1,7 @@
 {
   "contacts": {
-    "phone": "+7 (771) 707-00-11",
-    "phoneSecondary": "+7 (700) 331-77-45",
+    "phone": "+7 (700) 331-77-44",
+    "phoneSecondary": "+7 (700) 331-77-44",
     "email": "info@nerja.kz",
     "emailOrders": "orders@nerja.kz",
     "address": "г. Алматы, пр-т Рыскулова 73А, металлобаза \"Окжетпес\"",
@@ -33,4 +33,3 @@
     ]
   }
 }
-
